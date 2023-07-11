@@ -1,0 +1,18 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: spfx-1.17.4
+  description: |
+    Basic SPFX Webpart solution for SPFx 1.17.4 with React and FluentUI
+  links:
+    - title: SPFx
+      url: https://learn.microsoft.com/en-us/sharepoint/dev/spfx/sharepoint-framework-overview
+    - title: Fluent UI
+      url: https://developer.microsoft.com/en-us/fluentui#/
+  tags:
+    - spfx
+      react
+spec:
+  type: library
+  owner: SP Hotel
+  lifecycle: experimental
