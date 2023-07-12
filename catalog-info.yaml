@@ -15,6 +15,6 @@ metadata:
 spec:
   type: library
   owner: SP Hotel
-  lifecycle: appointed
+  lifecycle: emerging
   system: sharepoint-online
 
