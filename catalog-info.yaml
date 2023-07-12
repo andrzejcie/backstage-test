@@ -14,7 +14,7 @@ metadata:
     - react
 spec:
   type: library
-  owner: SP Hotel
+  owner: guest
   lifecycle: emerging
   system: sharepoint-online
 
