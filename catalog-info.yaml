@@ -11,8 +11,9 @@ metadata:
       url: https://developer.microsoft.com/en-us/fluentui#/
   tags:
     - spfx
-      react
+    - react
 spec:
   type: library
   owner: SP Hotel
+  system: sharepoint-online
   lifecycle: experimental
