@@ -14,7 +14,7 @@ metadata:
     - react
 spec:
   type: library
-  owner: guest
+  owner: digital
   lifecycle: emerging
   system: sharepoint-online
 
