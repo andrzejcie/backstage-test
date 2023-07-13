@@ -1,0 +1,66 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-template
+kind: Template
+metadata:
+  name: spfx
+  title: SANDBOX - SPFx React template
+  description: Enable techDocs for a repository.
+  tags:
+    - spfx
+spec:
+  owner: group:digital
+  type: sandbox
+
+  # These parameters are used to generate the input form in the frontend, and are
+  # used to gather input data for the execution of the template.
+  parameters:
+    - title: About the service
+      description: >
+        This is a sample SPFx starter 
+        To find more details and available features please visit this page. [this page](https://learn.microsoft.com/en-us/sharepoint/dev/spfx/sharepoint-framework-overview).
+
+        ## Preconditions
+
+        In order to try out the Sandboxed version of template the user needs to have Node.js v16 installed.
+
+    - title: Provide a repository name
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository name
+          type: string
+          description: Name of the repository
+
+  # These steps are executed in the scaffolder backend, using data that we gathered
+  # via the parameters above.
+  steps:
+    - id: fetch-plain-repo
+      name: Fetch Entity Repository
+      action: fetch:plain
+      input:
+        url: https://github.com/volvogroup-internal/${{ parameters.repoUrl }}
+    
+    - id: fetch-techdocs
+      name: Fetch Content
+      action: fetch:template
+      input:
+        targetPath: Frontend
+        url: https://github.com/andrzejcie/backstage-test/tree/main/content
+        values:
+          name: ${{ parameters.entityName | parseEntityRef | pick('name') }}
+
+    - id: pullrequestdir
+      name: Pull Request
+      action: publish:github:pull-request
+      input:
+        repoUrl: github.com?owner=volvogroup-internal&repo=${{ parameters.repoUrl }}
+        branchName: feature/spfx
+        title: Add frontend initial structure
+        description: This is PR to add initial structure
+
+  # Outputs are displayed to the user after a successful execution of the template.
+  output:
+    links:
+      - title: PullRequestUrl
+        url: ${{ steps.pull-request.output.remoteUrl }}
